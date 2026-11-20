@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>توظيف الذكاء الاصطناعي والأتمتة في تطوير الصناعة الحديثة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d1424;--steel:#38bdf8;--orange:#fb923c;--mist:#e8eef9;--ink:#0a1020;--card:rgba(255,255,255,.07);--line:rgba(232,238,249,.18);color-scheme:dark}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background-color:var(--bg);background-image:radial-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(160deg,#0d1424 0%,#10213a 55%,#1a1a2e 100%);background-size:26px 26px,100% 100%;color:var(--mist);font-family:'Cairo','Segoe UI',Tahoma,sans-serif;overflow:hidden}
+.deck{position:relative;height:100%;width:100%}
+
+/* slides + 3D flip */
+.slide{position:absolute;inset:0;padding:clamp(20px,4vw,56px) clamp(20px,5vw,72px) 136px;display:flex;flex-direction:column;gap:clamp(14px,2.4vh,26px);opacity:0;visibility:hidden;
+  transform:perspective(1400px) rotateY(28deg) translateX(-70px) scale(.93);transition:opacity .7s,transform .8s cubic-bezier(.2,.8,.2,1),visibility .7s;overflow-y:auto}
+.slide.active{opacity:1;visibility:visible;transform:none}
+.slide.prev{transform:perspective(1400px) rotateY(-28deg) translateX(70px) scale(.93)}
+.slide::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;background:radial-gradient(900px 500px at 10% 0%,color-mix(in srgb,var(--accent,#38bdf8) 30%,transparent),transparent 60%),radial-gradient(700px 400px at 100% 100%,rgba(251,146,60,.14),transparent 60%)}
+.slide>*{position:relative;z-index:1}
+.slide:not(.cover){justify-content:flex-start;justify-content:safe center}
+.slide:not(.cover)>*{width:100%;max-width:1240px;margin-inline:auto}
+.s1{--accent:#38bdf8}.s2{--accent:#fb923c}.s3{--accent:#a3e635}.s4{--accent:#c084fc}.s5{--accent:#fbbf24}
+
+/* background life */
+.fl{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.fl span{position:absolute;bottom:-60px;opacity:.14;animation:floatup linear infinite}
+@keyframes floatup{to{transform:translateY(-115vh) rotate(360deg)}}
+.orb{position:fixed;width:380px;height:380px;border-radius:50%;left:0;top:0;z-index:0;pointer-events:none;margin:-190px 0 0 -190px;background:radial-gradient(circle,rgba(56,189,248,.16),transparent 65%);transition:transform .35s ease-out}
+#prog{position:fixed;top:0;right:0;height:5px;width:0;background:var(--orange);z-index:20;transition:width .5s,background .5s;border-radius:0 0 0 4px}
+
+/* cover */
+.cover{justify-content:center}
+.pt{position:absolute!important;inset:0;width:100%;height:100%;z-index:0!important;pointer-events:none}
+.gear{position:absolute!important;z-index:1;animation:spin 14s linear infinite;filter:drop-shadow(0 0 22px rgba(251,146,60,.55))}
+.g1{top:7%;left:7%;width:clamp(80px,12vw,150px)}
+.g2{top:20%;left:calc(7% + clamp(70px,10.5vw,130px));width:clamp(44px,6.5vw,80px);animation-direction:reverse;animation-duration:9s}
+@keyframes spin{to{transform:rotate(360deg)}}
+.belt{position:absolute!important;inset-inline:0;bottom:3%;height:10px;z-index:0!important;pointer-events:none}
+.belt::after{content:"";position:absolute;inset:auto 0 0 0;height:6px;border-radius:4px;background:repeating-linear-gradient(90deg,rgba(56,189,248,.55) 0 18px,transparent 18px 30px);animation:beltmove 1.2s linear infinite}
+@keyframes beltmove{to{background-position:30px 0}}
+.belt span{position:absolute;bottom:8px;font-size:clamp(24px,3.4vw,44px);animation:run 11s linear infinite;animation-delay:var(--d)}
+@keyframes run{from{left:-8%}to{left:106%}}
+.cover h1{font-size:clamp(28px,5.2vw,64px);font-weight:900;line-height:1.35;max-width:20ch;background:linear-gradient(90deg,#e8eef9,#fb923c,#38bdf8,#e8eef9);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 9s linear infinite;filter:drop-shadow(0 8px 30px rgba(0,0,0,.35))}
+@keyframes shine{to{background-position:-300% 0}}
+.sub{color:var(--orange);font-size:clamp(16px,2.2vw,28px);font-weight:700}
+.abstract{max-width:70ch;font-size:clamp(14px,1.5vw,19px);line-height:1.95;color:#c5d3ea;background:rgba(255,255,255,.06);border-radius:18px;padding:16px 22px;border-right:5px solid var(--orange);backdrop-filter:blur(8px)}
+.q{max-width:70ch;font-size:clamp(14px,1.5vw,19px);line-height:1.95;background:rgba(56,189,248,.08);border:1px dashed var(--steel);border-radius:18px;padding:14px 22px;backdrop-filter:blur(8px)}
+.q strong{color:var(--steel)}
+.hint{color:#9fb2d4;font-size:clamp(12px,1.2vw,15px);margin-top:6px}
+.team{display:flex;flex-wrap:wrap;gap:12px;margin-top:2px}
+.team button{background:linear-gradient(160deg,rgba(255,255,255,.12),rgba(255,255,255,.04));backdrop-filter:blur(8px);color:var(--mist);border:1.5px solid var(--c);padding:12px 22px;border-radius:999px;font-family:inherit;font-weight:700;font-size:clamp(13px,1.4vw,17px);cursor:pointer;transition:.2s;display:flex;align-items:center;gap:10px;box-shadow:0 12px 28px -16px var(--c);animation:bob 3.2s ease-in-out infinite}
+.team button:nth-child(2){animation-delay:.4s}.team button:nth-child(3){animation-delay:.8s}.team button:nth-child(4){animation-delay:1.2s}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.team button::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--c);box-shadow:0 0 12px var(--c)}
+.team button:hover{background:var(--c);color:var(--ink);animation-play-state:paused}
+.team button:hover::before{background:var(--ink);box-shadow:none}
+
+/* head */
+.head{display:grid;grid-template-columns:auto 1fr;column-gap:clamp(14px,2vw,24px);align-items:center}
+.av{grid-row:1/3;width:clamp(54px,6vw,80px);height:clamp(54px,6vw,80px);border-radius:22px;background:var(--accent);color:var(--ink);display:grid;place-items:center;font-weight:900;font-size:clamp(26px,3.2vw,42px);box-shadow:0 14px 34px -12px var(--accent);animation:wob 5s ease-in-out infinite}
+@keyframes wob{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg) scale(1.06)}}
+.head h2{font-size:clamp(26px,4vw,52px);font-weight:900;line-height:1.2;text-shadow:0 4px 24px rgba(0,0,0,.4)}
+.axis{color:var(--accent);font-weight:800;font-size:clamp(14px,1.8vw,22px);margin-top:2px}
+
+/* cards */
+.body{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,24px);align-content:start}
+.body.three{grid-template-columns:repeat(3,1fr)}
+.card{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(160deg,rgba(255,255,255,.11),rgba(255,255,255,.03));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.14);border-radius:24px;box-shadow:0 22px 44px -26px rgba(0,0,0,.8);padding:clamp(18px,2.4vw,32px);cursor:pointer;transition:background .3s,border-color .3s,transform .3s,opacity .3s,color .3s;-webkit-tap-highlight-color:transparent}
+.card::after{content:"";position:absolute;top:0;inset-inline:0;height:4px;background:linear-gradient(90deg,var(--accent),transparent)}
+.card::before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .3s;background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--accent) 35%,transparent),transparent 65%)}
+.card h3{display:flex;align-items:center;font-size:clamp(17px,2vw,26px);font-weight:800;color:var(--accent);margin-bottom:12px;transition:color .3s}
+.card p{font-size:clamp(14px,1.55vw,20px);line-height:2.05;color:#dbe6f7}
+.card.wide{grid-column:1/-1}
+.ic{display:inline-grid;place-items:center;width:1.9em;height:1.9em;flex:none;font-size:1.15em;border-radius:14px;margin-inline-end:12px;background:color-mix(in srgb,var(--accent) 22%,transparent);transition:transform .3s}
+.card:hover{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,transparent);transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(-6px)}
+.card:hover::before{opacity:1}
+.card:hover .ic{transform:scale(1.25) rotate(-8deg)}
+.card:active{transform:scale(.985)}
+.card.sel{background:var(--accent);border-color:var(--accent);color:var(--ink);transform:scale(1.015)}
+.card.sel::before,.card.sel::after{opacity:0}
+.card.sel h3,.card.sel b,.card.sel p{color:var(--ink)}
+.card.sel p,.card.sel li{font-weight:700}
+.card.sel .ic{background:rgba(0,0,0,.14)}
+.body.has-sel .card:not(.sel){opacity:.35}
+.stat{display:flex;align-items:center;gap:clamp(14px,2.5vw,32px)}
+.stat b{font-size:clamp(44px,8vw,104px);font-weight:900;color:var(--accent);line-height:1;white-space:nowrap;font-variant-numeric:tabular-nums;text-shadow:0 0 36px color-mix(in srgb,var(--accent) 55%,transparent)}
+.card.sel b{text-shadow:none}
+.stat>div{flex:1}
+.meter{height:16px;background:rgba(255,255,255,.14);border-radius:8px;margin-top:14px;overflow:hidden;box-shadow:inset 0 2px 6px rgba(0,0,0,.35)}
+.meter i{display:block;height:100%;width:0;background:var(--accent);border-radius:8px;box-shadow:0 0 18px var(--accent);transition:width 1.4s .4s cubic-bezier(.2,.8,.2,1)}
+.slide.active .meter i{width:var(--w)}
+.card.sel .meter{background:rgba(0,0,0,.2)}.card.sel .meter i{background:var(--ink);box-shadow:none}
+.source{display:flex;gap:12px;align-items:center;cursor:pointer;transition:.3s;border-radius:18px;padding:16px 22px;font-size:clamp(13px,1.4vw,18px);line-height:1.8;backdrop-filter:blur(8px);border:1px solid color-mix(in srgb,var(--accent,#fb923c) 55%,transparent);background:color-mix(in srgb,var(--accent,#fb923c) 12%,transparent)}
+.source::before{content:"📚";font-size:1.5em}
+.source strong{color:var(--accent);white-space:nowrap}
+.source:hover,.source.sel{background:var(--accent);color:var(--ink)}
+.source:hover strong,.source.sel strong{color:var(--ink)}
+.rec{counter-reset:r;list-style:none;display:grid;gap:10px}
+.rec li{counter-increment:r;display:flex;gap:14px;align-items:flex-start;font-size:clamp(14px,1.55vw,20px);line-height:1.8;background:rgba(255,255,255,.05);padding:12px 16px;border-radius:12px}
+.rec li::before{content:counter(r);flex:none;width:34px;height:34px;border-radius:50%;background:var(--accent);color:var(--ink);display:grid;place-items:center;font-weight:800;box-shadow:0 6px 16px -6px var(--accent)}
+.ai{border-style:dashed}
+@keyframes rise{from{opacity:0;transform:translateY(34px)}}
+.slide.active .head{animation:rise .6s backwards}
+.slide.active .card,.slide.active .source{animation:rise .7s backwards}
+.slide.active .card:nth-child(1){animation-delay:.15s}.slide.active .card:nth-child(2){animation-delay:.3s}.slide.active .card:nth-child(3){animation-delay:.45s}.slide.active .source{animation-delay:.6s}
+
+/* bar */
+.bar{position:fixed;bottom:0;left:0;right:0;display:flex;flex-direction:column;gap:6px;padding:10px clamp(12px,4vw,56px) calc(8px + env(safe-area-inset-bottom,0px));background:rgba(13,20,36,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);z-index:10}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.dots{display:flex;gap:8px}
+.dots button{width:12px;height:12px;border-radius:50%;border:0;background:var(--line);cursor:pointer;transition:.25s}
+.dots button.on{width:34px;border-radius:8px}
+.nav{display:flex;gap:8px;align-items:center;margin-inline:auto}
+.pair{display:flex;gap:8px}
+.nav button{background:var(--card);color:var(--mist);border:1px solid var(--line);border-radius:14px;height:42px;padding:0 16px;font:700 15px 'Segoe UI',Tahoma,sans-serif;letter-spacing:.5px;cursor:pointer;white-space:nowrap;transition:.2s}
+.nav button:hover{background:var(--steel);color:var(--ink)}
+.nav button:active{transform:scale(.93)}
+.nav #nx{background:var(--orange);color:var(--ink);border-color:var(--orange)}
+.nav #nx:hover{background:#fdba74}
+.nav button:disabled{opacity:.35;cursor:default;transform:none}
+#cnt{min-width:54px;text-align:center;font-weight:800;color:var(--orange);font-size:clamp(13px,1.4vw,17px);direction:ltr}
+.credit{text-align:center;font-size:12px;color:#8aa0c6;font-family:'Segoe UI',Tahoma,sans-serif}
+.credit strong{color:var(--orange)}
+button:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.burst{position:fixed;bottom:-40px;font-size:30px;z-index:30;pointer-events:none;animation:fly 2.4s ease-out forwards}
+@keyframes fly{to{transform:translate(var(--x),-105vh) rotate(540deg);opacity:0}}
+@media(max-width:760px){.body,.body.three{grid-template-columns:1fr}.stat{flex-direction:column;align-items:flex-start}.gear,.belt span:nth-child(n+4){display:none}.dots{display:none}.slide:not(.cover){justify-content:flex-start}.nav{gap:4px;width:100%;justify-content:space-between}.pair{gap:4px}.nav button{padding:0 9px;font-size:12px;height:38px}#cnt{min-width:40px;font-size:12px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div class="fl" id="fl"></div><div class="orb" id="orb"></div>
+<main class="deck">
+
+<section class="slide cover active">
+  <canvas id="pt" class="pt"></canvas>
+  <svg class="gear g1" viewBox="0 0 100 100" fill="none" stroke="#fb923c" stroke-width="4"><circle cx="50" cy="50" r="30" stroke-width="12" stroke-dasharray="6.28 3.14"/><circle cx="50" cy="50" r="22"/><circle cx="50" cy="50" r="8" stroke="#38bdf8"/></svg>
+  <svg class="gear g2" viewBox="0 0 100 100" fill="none" stroke="#38bdf8" stroke-width="4"><circle cx="50" cy="50" r="30" stroke-width="12" stroke-dasharray="6.28 3.14"/><circle cx="50" cy="50" r="22"/><circle cx="50" cy="50" r="8" stroke="#fb923c"/></svg>
+  <div class="belt"><span style="--d:0s">📦</span><span style="--d:-2s">⚙️</span><span style="--d:-4s">📦</span><span style="--d:-6s">🔩</span><span style="--d:-8s">📦</span><span style="--d:-10s">⚙️</span></div>
+  <h1>توظيف تطبيقات الذكاء الاصطناعي والأتمتة في تطوير الصناعة الحديثة</h1>
+  <div class="sub">الفرص والتحديات</div>
+  <div class="q"><strong>السؤال الرئيسي:</strong> ما مدى فعالية تطبيقات الذكاء الاصطناعي وإنترنت الأشياء في رفع كفاءة الإنتاج الصناعي وتقليل الأعطال، وما أبرز التحديات الاقتصادية والتشريعية التي تواجه المصانع عند تطبيقها؟</div>
+  <p class="abstract">يشهد القطاع الصناعي العالمي ثورة جديدة تُعرف بـ «الثورة الصناعية الرابعة»، حيث تعتمد المصانع الذكية على الروبوتات والذكاء الاصطناعي لتحسين الجودة وتسريع الإنتاج. يهدف هذا البحث إلى تحليل هذه التقنيات ومقارنتها بالطرق التقليدية، مع دراسة أثرها على سوق العمل والضوابط التنظيمية اللازمة.</p>
+  <div class="hint">اضغط على اسمك للانتقال لصفحتك مباشرة</div>
+  <div class="team"><button data-go="1" style="--c:#38bdf8">مصطفى محمد عبدالجليل</button><button data-go="2" style="--c:#fb923c">مروان رفيق</button><button data-go="3" style="--c:#a3e635">هاني عاطف</button><button data-go="4" style="--c:#c084fc">محمود عماد</button></div>
+</section>
+
+<section class="slide s1">
+  <div class="head"><span class="av">م</span><h2>مصطفى محمد عبدالجليل</h2><div class="axis">التطور التقني وحدود القدرات في الصناعة</div></div>
+  <div class="body">
+    <div class="card wide"><h3><span class="ic">🏭</span>الشرح التقني</h3><p>تعتمد «المصانع الذكية» على تقنيات إنترنت الأشياء الصناعي (IIoT) والروبوتات المبرمجة؛ حيث يتم ربط خطوط الإنتاج بأجهزة استشعار تجمع البيانات لحظياً، وتقوم خوارزميات التعلم الآلي بتحليلها للتنبؤ بأعطال الآلات قبل حدوثها (الصيانة التنبؤية)، بالإضافة إلى استخدام الرؤية الحاسوبية لفحص المنتجات واكتشاف عيوب التصنيع بدقة متناهية تفوق العين البشرية.</p></div>
+    <div class="card wide"><h3><span class="ic">⚠️</span>حدود القدرات التقنية</h3><p>رغم القدرات الفائقة، تواجه هذه الأنظمة صعوبات في التعامل مع المواقف غير المتوقعة أو الأعطال الميكانيكية المعقدة التي تتطلب تدخلاً بشرياً إبداعياً، كما أن اعتمادها الكلي على الشبكات يجعلها عرضة للتوقف التام في حال حدوث انقطاع في الاتصال أو هجمات سيبرانية.</p></div>
+  </div>
+  <div class="source"><strong>المصدر الموثق:</strong><span>كتاب «الثورة الصناعية الرابعة» للمؤلف كلاوس شواب (Klaus Schwab)، والذي يوضح كيف أدى دمج الأنظمة الرقمية والمادية إلى تغيير جذري في سلاسل الإمداد والتصنيع الذكي.</span></div>
+</section>
+
+<section class="slide s2">
+  <div class="head"><span class="av">م</span><h2>مروان رفيق</h2><div class="axis">التطبيقات العملية ومقارنة استخدامها</div></div>
+  <div class="body">
+    <div class="card"><h3><span class="ic">🤖</span>الروبوتات التعاونية (Cobots)</h3><p>روبوتات تعمل جنباً إلى جنب مع العمال البشريين في خطوط تجميع السيارات والإلكترونيات للقيام بالمهام الشاقة أو الدقيقة.</p></div>
+    <div class="card"><h3><span class="ic">🧊</span>التوأم الرقمي (Digital Twin)</h3><p>إنشاء نسخة افتراضية ثلاثية الأبعاد للمصنع أو المنتج لاختبار كفاءته وتعديل تصميمه رقمياً قبل تصنيعه فعلياً، مما يوفر خامات ووقتاً كبيراً.</p></div>
+    <div class="card wide stat"><b>30–50%</b><div><h3><span class="ic">⚖️</span>مقارنة واقعية</h3><p>عند مقارنة خطوط الإنتاج التقليدية (التي تعتمد على الصيانة الدورية الثابتة والفحص اليدوي) بالمصانع المعتمدة على الذكاء الاصطناعي، نجد أن الصيانة التنبؤية تقلل من وقت توقف الآلات المفاجئ بنسبة تصل إلى 30% إلى 50%، وتزيد من دقة اكتشاف العيوب بشكل ملحوظ.</p><div class="meter"><i style="--w:20%;margin-inline-start:30%"></i></div></div></div>
+  </div>
+  <div class="source"><strong>المصدر الموثق:</strong><span>تقرير منظمة الأمم المتحدة للتنمية الصناعية (UNIDO) حول «التصنيع الذكي والتحول الرقمي في الصناعة».</span></div>
+</section>
+
+<section class="slide s3">
+  <div class="head"><span class="av">ه</span><h2>هاني عاطف</h2><div class="axis">الاقتصاد والمال والوظائف</div></div>
+  <div class="body">
+    <div class="card wide"><h3><span class="ic">💰</span>التحليل المالي</h3><p>يتطلب تحويل المصانع التقليدية إلى مصانع ذكية تكلفة تأسيسية مرتفعة تشمل شراء الروبوتات، وتحديث البنية التحتية الرقمية، وتدريب الكوادر. إلا أن هذا الاستثمار يحقق عائداً اقتصادياً قوياً على المدى الطويل من خلال تقليل هدر المواد الخام، وخفض استهلاك الطاقة، وزيادة القدرة التنافسية للمنتجات في الأسواق العالمية.</p></div>
+    <div class="card wide"><h3><span class="ic">👷</span>تأثيرها على الوظائف</h3><p>تؤدي الأتمتة إلى تراجع الطلب على الوظائف الروتينية اليدوية في خطوط الإنتاج، لكنها في المقابل تخلق وظائف جديدة وعالية الأجر في مجالات برمجة الروبوتات، صيانة الأنظمة الذكية، وتحليل البيانات الصناعية، مما يفرض ضرورة إعادة تأهيل العمال الحاليين.</p></div>
+  </div>
+  <div class="source"><strong>المصدر الموثق:</strong><span>تقرير «مستقبل الوظائف» الصادر عن المنتدى الاقتصادي العالمي (World Economic Forum).</span></div>
+</section>
+
+<section class="slide s4">
+  <div class="head"><span class="av">م</span><h2>محمود عماد</h2><div class="axis">التحيز، الخصوصية، والتشريعات</div></div>
+  <div class="body three">
+    <div class="card"><h3><span class="ic">🔒</span>الأمن السيبراني وخصوصية البيانات الصناعية</h3><p>ربط المصانع بشبكات الإنترنت يعرض الأسرار الصناعية، وتصميمات المنتجات، وبيانات سلاسل الإمداد لخطر الاختراق والقرصنة الإلكترونية، مما قد يتسبب في خسائر مالية فادحة أو تعطيل خطوط الإنتاج.</p></div>
+    <div class="card"><h3><span class="ic">🧭</span>التحيز في أنظمة التوظيف والجودة</h3><p>إذا تم تدريب خوارزميات مراقبة الجودة أو تقييم أداء العمال على بيانات غير مكتملة أو متحيزة، فقد يؤدي ذلك إلى قرارات خاطئة في استبعاد منتجات سليمة أو تقييم غير عادل للعاملين.</p></div>
+    <div class="card"><h3><span class="ic">📜</span>المبدأ التنظيمي</h3><p>تحتاج المصانع الذكية إلى تشريعات صارمة تلزم الشركات بتطبيق معايير الأمان السيبراني الصناعي، وتحدد المسؤولية القانونية في حال تسبب خطأ برمجي لروبوت في إصابة أحد العاملين أو إنتاج سلعة معيبة.</p></div>
+  </div>
+</section>
+
+<section class="slide s5">
+  <div class="head"><span class="av">★</span><h2>الاستنتاج والتوصيات</h2><div class="axis">الفريق بالكامل</div></div>
+  <div class="body">
+    <div class="card wide"><h3><span class="ic">🎯</span>الاستنتاج</h3><p>توصل الفريق إلى أن دمج الذكاء الاصطناعي والتكنولوجيا في الصناعة لم يعد خياراً بل ضرورة لضمان الجودة والمنافسة، بشرط الموازنة بين الأتمتة وتطوير مهارات العنصر البشري.</p></div>
+    <div class="card wide"><h3><span class="ic">✅</span>التوصيات</h3><ol class="rec"><li>تقديم حوافز ضريبية أو تمويلية للمصانع المتوسطة والصغيرة لتحديث خطوط إنتاجها تكنولوجياً.</li><li>تطوير مناهج التعليم الفني والهندسي لتشمل برمجة الأنظمة الصناعية والأمن السيبراني.</li></ol></div>
+    <div class="card wide ai"><h3><span class="ic">🤖</span>إقرار استخدام الذكاء الاصطناعي</h3><p>يُقر الفريق بأنه تم الاستعانة بأدوات الذكاء الاصطناعي كمساعد في تنظيم الأفكار وصياغة وترتيب فقرات البحث، مع مراجعة جميع المصادر والمعلومات والتأكد من صحتها يدوياً.</p></div>
+  </div>
+</section>
+</main>
+
+<div class="bar">
+  <div class="row"><div class="dots" id="dots"></div>
+    <div class="nav" dir="ltr">
+      <div class="pair"><button id="pv">← Back</button><button id="nx">Next →</button></div>
+      <span id="cnt"></span><button id="hm">Home</button><button id="fs">⛶ Fullscreen</button>
+    </div></div>
+  <div class="credit" dir="ltr">Designed &amp; developed by <strong>Mustafa Muhammad Abdul Jalil</strong></div>
+</div>
+
+<script>
+var S=[].slice.call(document.querySelectorAll('.slide')),D=document.getElementById('dots'),C=document.getElementById('cnt'),P=document.getElementById('prog'),i=0;
+S.forEach(function(_,n){var b=document.createElement('button');b.setAttribute('aria-label','Slide '+(n+1));b.onclick=function(){go(n)};D.appendChild(b)});
+[].forEach.call(document.querySelectorAll('.stat b'),function(b){b.dataset.t=b.textContent});
+function burst(){var em=['⚙️','✨','🔩','⚡','🤖'];for(var k=0;k<28;k++){(function(k){var b=document.createElement('span');b.className='burst';b.textContent=em[k%5];
+  b.style.left=(10+Math.random()*80)+'%';b.style.setProperty('--x',(Math.random()*240-120)+'px');b.style.animationDelay=(Math.random()*.5)+'s';
+  document.body.appendChild(b);setTimeout(function(){b.remove()},3200)})(k)}}
+function go(n){
+  i=Math.max(0,Math.min(S.length-1,n));
+  S.forEach(function(s,k){s.classList.toggle('active',k===i);s.classList.toggle('prev',k<i);if(k===i)s.scrollTop=0});
+  var c=getComputedStyle(S[i]).getPropertyValue('--accent').trim()||'#fb923c';
+  [].forEach.call(D.children,function(d,k){d.classList.toggle('on',k===i);d.style.background=k===i?c:''});
+  C.textContent=(i+1)+' / '+S.length;P.style.width=((i+1)/S.length*100)+'%';P.style.background=c;
+  document.getElementById('nx').disabled=i===S.length-1;
+  document.getElementById('pv').disabled=document.getElementById('hm').disabled=i===0;
+  document.querySelectorAll('.sel').forEach(function(x){x.classList.remove('sel')});
+  document.querySelectorAll('.has-sel').forEach(function(x){x.classList.remove('has-sel')});
+  S[i].querySelectorAll('.stat b').forEach(function(b){var t=b.dataset.t,t0=performance.now();
+    (function f(now){var k=Math.min(1,(now-t0)/1100),e=1-Math.pow(1-k,3);b.textContent=t.replace(/\d+/g,function(m){return Math.round(+m*e)});if(k<1)requestAnimationFrame(f)})(t0)});
+  if(i===S.length-1)burst();
+  try{history.replaceState(null,'','#'+(i+1))}catch(e){}
+}
+document.getElementById('nx').onclick=function(){go(i+1)};
+document.getElementById('pv').onclick=function(){go(i-1)};
+document.getElementById('hm').onclick=function(){go(0)};
+document.getElementById('fs').onclick=function(){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()};
+document.querySelectorAll('[data-go]').forEach(function(b){b.onclick=function(){go(+b.dataset.go)}});
+addEventListener('keydown',function(e){
+  if(['ArrowLeft','PageDown',' '].indexOf(e.key)>-1){e.preventDefault();go(i+1)}
+  if(['ArrowRight','PageUp'].indexOf(e.key)>-1){e.preventDefault();go(i-1)}
+  if(e.key==='Home')go(0);if(e.key==='End')go(S.length-1);
+});
+var x0=null;
+addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+addEventListener('touchend',function(e){if(x0===null)return;var d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>60)go(d<0?i+1:i-1);x0=null});
+document.querySelectorAll('.card,.source').forEach(function(c){
+  c.addEventListener('click',function(){
+    var body=c.closest('.body'),on=!c.classList.contains('sel');
+    if(body){body.querySelectorAll('.card.sel').forEach(function(x){x.classList.remove('sel')});body.classList.toggle('has-sel',on)}
+    c.classList.toggle('sel',on);
+  });
+  c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px');
+    c.style.setProperty('--rx',(-y*7)+'deg');c.style.setProperty('--ry',(x*7)+'deg')});
+  c.addEventListener('mouseleave',function(){c.style.setProperty('--rx','0deg');c.style.setProperty('--ry','0deg')});
+});
+/* floating industrial icons + cursor orb */
+var fl=document.getElementById('fl');
+['⚙️','🔩','🤖','🏭','⚡','🔧'].forEach(function(e){for(var j=0;j<3;j++){var sp=document.createElement('span');sp.textContent=e;
+  sp.style.cssText='left:'+(Math.random()*96)+'%;font-size:'+(18+Math.random()*30)+'px;animation-duration:'+(16+Math.random()*20)+'s;animation-delay:-'+(Math.random()*30)+'s';fl.appendChild(sp)}});
+var orb=document.getElementById('orb');
+addEventListener('mousemove',function(e){orb.style.transform='translate('+e.clientX+'px,'+e.clientY+'px)'});
+/* cover particles */
+var cv=document.getElementById('pt'),cx=cv.getContext('2d'),pts=[];
+function rs(){cv.width=cv.offsetWidth;cv.height=cv.offsetHeight;pts=[];for(var k=0;k<55;k++)pts.push({x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*2.6+.8,v:Math.random()*.5+.15,c:Math.random()>.5?'251,146,60':'56,189,248'})}
+addEventListener('resize',rs);rs();
+(function tick(){
+  if(i===0){cx.clearRect(0,0,cv.width,cv.height);
+    pts.forEach(function(p){p.y-=p.v;p.x+=Math.sin(p.y/40)*.3;if(p.y<-5){p.y=cv.height+5;p.x=Math.random()*cv.width}
+      cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fillStyle='rgba('+p.c+',.55)';cx.fill()})}
+  requestAnimationFrame(tick)})();
+go((parseInt(location.hash.slice(1))||1)-1);
+</script>
+</body>
+</html>
